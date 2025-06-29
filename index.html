@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM_BREACH_SIMULATOR</title>
+    <style>
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                    0 0 4px #00ff41, 0 0 11px #00ff41, 0 0 19px #00ff41,
+                    0 0 40px #0fa, 0 0 80px #0fa, 0 0 90px #0fa,
+                    0 0 100px #0fa, 0 0 150px #0fa;
+            }
+            20%, 24%, 55% { text-shadow: none; }
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            background-color: #0d0208;
+            color: #00ff41;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 15px #00ff41;
+        }
+        h1, h2, h3 {
+            color: #ff0000;
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 10px;
+            text-shadow: 0 0 5px #ff0000;
+        }
+        h1 { animation: flicker 1.5s infinite alternate; }
+        .container { display: flex; gap: 30px; }
+        .main-content { flex: 2; }
+        .sidebar { flex: 1; }
+        .info-box {
+            background-color: rgba(0, 255, 65, 0.05);
+            padding: 15px;
+            border: 1px solid #00ff41;
+            margin-bottom: 20px;
+        }
+        .info-box p { margin: 0 0 5px 0; }
+        .info-box span { color: #fff; }
+        .disclaimer {
+            background-color: #8B0000; color: #fff; padding: 15px;
+            border: 1px solid #ff0000; font-weight: bold; margin-bottom: 20px; text-align: center;
+        }
+        #comment-form textarea {
+            width: 100%; padding: 10px; border: 1px solid #00ff41;
+            background-color: #000; color: #00ff41; min-height: 80px;
+            box-sizing: border-box; resize: none;
+        }
+        #comment-form button {
+            background-color: #ff0000; color: #fff; padding: 10px 15px;
+            border: 1px solid #fff; border-radius: 0; cursor: pointer;
+            font-size: 16px; font-family: 'Courier New', Courier, monospace;
+            width: 100%; margin-top: 10px; text-transform: uppercase;
+        }
+        #comment-form button:hover { background-color: #fff; color: #ff0000; }
+        .comment-box {
+            margin-top: 20px; border: 1px solid #00ff41; padding: 10px;
+            background-color: #000; min-height: 100px;
+        }
+        .comment { padding: 8px; border-bottom: 1px dashed rgba(0, 255, 65, 0.3); }
+        .comment:last-child { border-bottom: none; }
+        #attacker-log {
+            background-color: #000; color: #f1c40f; padding: 15px;
+            border: 1px solid #f1c40f; font-family: "Courier New", Courier, monospace;
+            min-height: 100px;
+        }
+        #attacker-log p { margin: 0 0 5px 0; word-break: break-all; }
+        label { color: #ff0000; }
+    </style>
+</head>
+<body>
+
+    <h1>> ROOT_ACCESS :: DATA_EXTRACTOR v6.0</h1>
+    <div class="disclaimer"> >> WARNING: USER TRACKING ACTIVE. ALL INTERACTIONS ARE MONITORED. << </div>
+
+    <div class="container">
+        <div class="main-content">
+            <h2>>_PAYLOAD_INJECTION_INTERFACE</h2>
+            <p>Cílový systém je kompromitován. Veškeré interakce vedou k extrakci datové stopy (session cookie).</p>
+            <form id="comment-form">
+                <label for="comment-input">> Vstupní vektor:</label><br>
+                <textarea id="comment-input" rows="4" placeholder="Cokoliv napíšeš, uvidím..."></textarea><br>
+                <button type="submit">> Execute & Exfiltrate <</button>
+            </form>
+            <div class="comment-box">
+                <h3>>_LIVE_SYSTEM_FEED</h3>
+                <div id="comments-display">
+                    <div class="comment">> [root@localhost ~]# System online. Awaiting user input...</div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="info-box" id="system-scan">
+                <h3>>_INITIAL_SYSTEM_SCAN</h3>
+                <p>Cíl: <span id="info-name" style="color: #ff0000; font-weight: bold;">[...identifikuji...]</span></p>
+                <p>IP Adresa: <span id="info-ip">[...skenuji...]</span></p>
+                <p>OS / Prohlížeč: <span id="info-ua">[...analyzuji...]</span></p>
+                <p>Rozlišení: <span id="info-res">[...detekuji...]</span></p>
+                <p>Jazyk: <span id="info-lang">[...sonduji...]</span></p>
+                <p>Čas. Pásmo: <span id="info-tz">[...lokalizuji...]</span></p>
+            </div>
+            
+            <div class="info-box">
+                <h3>>_DATA_EXFILTRATION_LOG</h3>
+                <div id="attacker-log">
+                    <p>> [SYSTEM] Logovací subsystém aktivní...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function gatherSystemInfo() {
+            // --- ZDE JE NOVÝ KÓD PRO ZÍSKÁNÍ JMÉNA Z URL ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const jmeno = urlParams.get('jmeno');
+
+            if (jmeno) {
+                document.getElementById('info-name').textContent = jmeno;
+            } else {
+                document.getElementById('info-name').textContent = 'Neznámý uživatel';
+            }
+            // --- KONEC NOVÉHO KÓDU ---
+
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => { document.getElementById('info-ip').textContent = data.ip; })
+                .catch(error => { document.getElementById('info-ip').textContent = 'Chyba při detekci'; });
+
+            document.getElementById('info-ua').textContent = navigator.userAgent;
+            document.getElementById('info-res').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('info-lang').textContent = navigator.language;
+            document.getElementById('info-tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.cookie = "session_token=0x4a8b1c9d2e7f3g6h; SameSite=Strict";
+            gatherSystemInfo();
+            // ... zbytek kódu zůstává stejný ...
+            const commentForm = document.getElementById('comment-form');
+            const commentInput = document.getElementById('comment-input');
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const commentText = commentInput.value;
+                if (commentText.trim() === '') { return; }
+                const newCommentHTML = '<div class="comment">> [user@localhost ~]$ ' + commentText + '</div>';
+                document.getElementById('comments-display').innerHTML += newCommentHTML;
+                logStolenData(document.cookie);
+                commentInput.value = '';
+            });
+        });
+
+        function logStolenData(data) {
+            const attackerLog = document.getElementById('attacker-log');
+            const newLogEntry = document.createElement('p');
+            const timestamp = `[${new Date().toLocaleTimeString()}]`;
+            const commentsDisplay = document.getElementById('comments-display');
+            const responseHTML = '<div class="comment" style="color: #f1c40f;">> [root@localhost ~]# DATA_PACKET_INTERCEPTED... LOGGING...</div>';
+            commentsDisplay.innerHTML += responseHTML;
+            newLogEntry.textContent = `${timestamp} INCOMING_COOKIE :: ${data}`;
+            attackerLog.appendChild(newLogEntry);
+        }
+    </script>
+
+</body>
+</html>
