@@ -1,12 +1,4 @@
-Jasně, tady je návrh profesionálního `README.md` souboru pro váš GitHub projekt. Je napsaný tak, aby jasně vysvětlil účel projektu, ukázal jeho funkce a zároveň obsahoval důležité upozornění, že se jedná o vzdělávací nástroj.
-
-Stačí zkopírovat celý text níže a vložit ho do souboru s názvem `README.md` ve vašem GitHub repozitáři.
-
------
-
 # Cookie Leak Prank - Vzdělávací Demonstrace
-
-Tento projekt je interaktivní a vzdělávací webová stránka, která zábavnou formou demonstruje principy zranitelnosti Cross-Site Scripting (XSS) a ukazuje, jaké informace může webová stránka zjistit o svých návštěvnících. Stránka je nastylována jako "hackerský" terminál pro posílení vizuálního dojmu.
 
 ## 🚀 Live Demo
 
