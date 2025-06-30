@@ -43,14 +43,6 @@ https://dominik-g-js.github.io/Cookie-Leak-trick/?jmeno=Pavel
 
 Když Pavel stránku otevře, v terminálu se zobrazí jeho jméno, jako by bylo právě získáno z jeho systému.
 
-## Důležité Upozornění
-
-Tento projekt byl vytvořen **čistě pro vzdělávací a demonstrativní účely**.
-
-  * **Nejedná se o skutečný hackerský nástroj** a neprovádí žádné reálné útoky ani neukládá žádná data.
-  * Všechny zobrazené "ukradené" údaje jsou buď testovací (cookie), běžně dostupné technické informace, nebo informace předané přímo v URL.
-  * Cílem projektu je zvýšit povědomí o webové bezpečnosti a ochraně soukromí.
-
 ## Autor
 
 Vytvořil **D.G.**
